@@ -1,35 +1,38 @@
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './pages/Home';
+import About from './pages/About';
+import Perfume from './pages/Perfume';
+import CustomerCenter from './pages/CustomerCenter';
+import Login from './pages/Login';
+import Join from './pages/Join';
+import MyPage from './pages/MyPage';
+import ProductList from './pages/ProductList';
+import ProductDetail from './pages/ProductDetail';
+import Cart from './pages/Cart';
+import ReviewList from './pages/ReviewList';
 import { CartProvider } from './context/CartContext';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import NewArrivals from './components/NewArrivals';
-import VideoCampaign from './components/VideoCampaign';
-import BestSellers from './components/BestSellers';
-import SaleItems from './components/SaleItems';
-import SpecialEvent from './components/SpecialEvent';
-import StoreMap from './components/StoreMap';
-import Footer from './components/Footer';
-import CartDrawer from './components/CartDrawer';
 
-function App() {
+export default function App() {
   return (
-    <CartProvider>
-      <div className="min-h-screen bg-white font-sans text-gray-900">
-        <Header />
-        <CartDrawer />
-        <main>
-          <Hero />
-          <NewArrivals />
-          <VideoCampaign />
-          <BestSellers />
-          <SaleItems />
-          <SpecialEvent />
-          <StoreMap />
-        </main>
-        <Footer />
-      </div>
-    </CartProvider>
+    <Router>
+      <CartProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="perfume" element={<Perfume />} />
+            <Route path="support" element={<CustomerCenter />} />
+            <Route path="login" element={<Login />} />
+            <Route path="join" element={<Join />} />
+            <Route path="mypage" element={<MyPage />} />
+            <Route path="products" element={<ProductList />} />
+            <Route path="product/:id" element={<ProductDetail />} />
+            <Route path="order/basket.html" element={<Cart />} />
+            <Route path="product/review.html" element={<ReviewList />} />
+          </Route>
+        </Routes>
+      </CartProvider>
+    </Router>
   );
 }
-
-export default App;
